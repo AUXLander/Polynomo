@@ -1,0 +1,11 @@
+﻿  Source.cpp
+c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(101): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
+c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(28): warning C4018: <: несоответствие типов со знаком и без знака
+  c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(25): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\users\auxla\desktop\polynomo\polynomo\source.cpp(9): note: выполняется компиляция ссылки на экземпляр шаблон функции "TNodeList<int>::TNodeList(int,Type *)"
+          with
+          [
+              Type=int
+          ]
+  c:\users\auxla\desktop\polynomo\polynomo\source.cpp(9): note: выполняется компиляция ссылки на экземпляр шаблон класс "TNodeList<int>"
+  Polynomo.vcxproj -> C:\Users\auxla\Desktop\Polynomo\Polynomo\Debug\Polynomo.exe
