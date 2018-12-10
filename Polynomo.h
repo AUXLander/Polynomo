@@ -1,17 +1,29 @@
 #pragma once
-class TPolynomo
-{
+#include <string>
+#include "NodeList.h"
+#define mStruct mStruct // Welcome to the dark neone love - Drive (2011)
 
-
-public:
-	TPolynomo();
-	~TPolynomo();
+struct mStruct {
+	int factor;
+	int powerCombo;
 };
 
-TPolynomo::TPolynomo(){
+namespace std {
+	class TPolynomo {
+		TNodeList<mStruct> polynomoList;
 
-}
+	public:
+		TPolynomo();
 
-TPolynomo::~TPolynomo(){
+		mStruct& createElement(int factor, int _x = 0, int _y = 0, int _z = 0);
+
+		void addElement(mStruct& elem);
+
+		bool loadString(string _string);
+
+		string saveString();
+
+		~TPolynomo();
+	};
 
 }

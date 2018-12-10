@@ -10,12 +10,17 @@ struct Node {
 template<class Type>
 class TNodeList {
 	int size;
-	int lastOut;// попытка оптимизации
+	int lastOut;// try to optimize
 	Node<Type>* pLast;
 	Node<Type>* pFirst;
-	Node<Type>* pLastOut;// попытка оптимизации
+	Node<Type>* pLastOut;// try to optimize
 
 public:
+	TNodeList() {
+		size = 0;
+		lastOut = 0;
+		pLastOut = nullptr;
+	}
 	TNodeList(int _size, Type* _vArray) {
 		__throwif__(_size < 0, _size);
 
