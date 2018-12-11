@@ -11,6 +11,9 @@ int main() {
 	TPolynomo pol;
 	mStruct t = pol.createElement(1, 3);
 	pol.addElement(t);
+	pol.addElement(t, ADD);
+
+	cout << pol.getElement(0);
 
 	system("pause");
 

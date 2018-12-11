@@ -1,6 +1,8 @@
 #pragma once
 #include "ToolSet.h"
 
+enum operation { UNSET, ADD, SUB, MUL, DIV };
+
 template<typename Type>
 struct Node {
 	Type value;
@@ -9,18 +11,21 @@ struct Node {
 
 template<class Type>
 class TNodeList {
-	int size;
+	int cSize;
 	int lastOut;// try to optimize
 	Node<Type>* pLast;
 	Node<Type>* pFirst;
 	Node<Type>* pLastOut;// try to optimize
 
 public:
+	const int& length = cSize;
+
 	TNodeList() {
-		size = 0;
+		cSize = 0;
 		lastOut = 0;
 		pLastOut = nullptr;
 	}
+
 	TNodeList(int _size, Type* _vArray) {
 		__throwif__(_size < 0, _size);
 
@@ -45,15 +50,15 @@ public:
 		}
 
 		pLast->pNext = pFirst;
-		size = size + 1;
+		cSize = cSize + 1;
 
 		return pLast;
 	}
 
 	Node<Type>* getNode(int _index) {
-		__throwif__(_index >= size, _index);
+		__throwif__(_index >= cSize, _index);
 
-		if (_index == size - 1) {
+		if (_index == cSize - 1) {
 			return pLast;
 		}
 
@@ -64,7 +69,7 @@ public:
 		int i = 0;
 		Node<Type>* tpNode = pFirst;
 
-		if (lastOut < _index) {
+		if (lastOut <= _index) {
 			i = lastOut;
 			tpNode = pLastOut;
 		}
@@ -90,18 +95,18 @@ public:
 	}
 
 	Node<Type>* removeNode(Node<Type>* _pNode) {
-		__throwif__(size == 0);
+		__throwif__(cSize == 0);
 
 		if (_pNode == pLastOut) {
 			pLastOut = pFirst;
 			lastOut = 0;
 		}
 
-		if (size == 1) {
+		if (cSize == 1) {
 			pFirst = nullptr;
 			pLast = nullptr;
 			delete _pNode;
-			size = size - 1;
+			cSize = cSize - 1;
 			return nullptr;
 		}
 
@@ -117,7 +122,7 @@ public:
 					pLast = tcNode;
 				}
 				delete _pNode;
-				size = size - 1;
+				cSize = cSize - 1;
 
 				return tcNode;
 			}
@@ -129,10 +134,10 @@ public:
 
 	Node<Type>* insertNodeAfter(int _index, Node<Type>& _v) {
 		__throwif__(_index < -1, _index);
-		__throwif__(_index >= size, _index);
-		__throwif__(size == 0, size);
+		__throwif__(_index >= cSize, _index);
+		__throwif__(cSize == 0, cSize);
 
-		if (_index == size - 1) {
+		if (_index == cSize - 1) {
 			lastOut = 0;
 			pLastOut = pFirst;
 			return addNode(_v.value);
@@ -154,22 +159,46 @@ public:
 			pFirst = insertNode;
 		}
 
-		size = size + 1;
+		cSize = cSize + 1;
 
 		lastOut = 0;
 		pLastOut = pFirst;
 		return insertNode;
 	}
 
-	Type getNodeValue(int _index) {
+	Type& getNodeValue(int _index) {
 		return getNode(_index)->value;
 	}
 
-	size_t getSize() {
-		return size;
+	Node<Type>* setNode(Node<Type>* _pNode, Type _newValue, operation _oType = UNSET) {
+		__throwif__(_pNode == nullptr, _pNode);
+
+		switch (_oType) {
+		case ADD:
+			_pNode->value = (_pNode->value + _newValue); break;
+		case SUB:
+			_pNode->value = (_pNode->value - _newValue); break;
+		case MUL:
+			_pNode->value = (_pNode->value * _newValue); break;
+		case DIV:
+			_pNode->value = (_pNode->value / _newValue); break;
+		default:
+			_pNode->value = _newValue;
+		}
+
+		return _pNode;
 	}
 
-	~TNodeList(){
+	Node<Type>* editNode(int _index, Type _newValue, operation _oType = UNSET) {
+		__throwif__(_index < 0, _index);
+		return setNode(getNode(_index), _newValue, _oType);
+	}
+
+	Type operator[](int _index) {
+		return getNodeValue(_index);
+	}
+
+	~TNodeList() {
 		Node<Type>* remNode;
 		Node<Type>* tNode = pFirst;
 		do {

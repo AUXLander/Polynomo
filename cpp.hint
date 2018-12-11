@@ -1,0 +1,32 @@
+#define __throwif__(expression,notification) if(expression){throw notification;}//read as rap god lmao
+#define forever while(true)
+#define ever (;;) // for ever
+#define repeat(count) for(unsigned int p3xe_i = 0; p3xe_i < (count); ++p3xe_i)
+#define foreach(type, key, mass) type key; for(unsigned int i = 0; i < (mass).length; i++, key = (mass)[i])// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
+// (например, имена функций и макросов).
+// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
+#define foreach(type, key, mass) type key; for(unsigned int i = 0; i < (mass).length; i++, key = (mass)[i])
+// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
+// (например, имена функций и макросов).
+// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
+#define __throwif__(expression, notification) if(expression){throw notification;}
+// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
+// (например, имена функций и макросов).
+// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
+#define foreach(type, key, mass) type key; for(unsigned int i = 0; i < (mass).length; i++, key = (mass)[i])
+// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
+// (например, имена функций и макросов).
+// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
+#define foreach(type, key, mass) type key; for(unsigned int i = 0; i < (mass).length; i++, key = (mass)[i])
+// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
+// (например, имена функций и макросов).
+// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
+#define foreach(type, key, mass) type key; for(unsigned int i = 0; i < (mass).length; i++, key = mass[i])
+// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
+// (например, имена функций и макросов).
+// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
+#define foreach(type, key, mass) type key; for(unsigned int i = 0; i < mass.length; i++, key = mass[i])
+// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
+// (например, имена функций и макросов).
+// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
+#define mStruct
