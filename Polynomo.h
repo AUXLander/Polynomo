@@ -79,10 +79,9 @@ namespace std {
 				return;
 				break;
 			default:
-				
+				polynomoList.addNode(elem);
 				break;
 			}
-			polynomoList.addNode(elem);
 		}
 
 		string decodeElem(mStruct& _v);
