@@ -11,23 +11,29 @@ struct Node {
 
 template<class Type>
 class TNodeList {
-	int cSize;
+	int size;
 	int lastOut;// try to optimize
 	Node<Type>* pLast;
 	Node<Type>* pFirst;
 	Node<Type>* pLastOut;// try to optimize
 
 public:
-	const int& length = cSize;
+	const int& length = size;
 
 	TNodeList() {
-		cSize = 0;
+		size = 0;
 		lastOut = 0;
+		pLast = nullptr;
+		pFirst = nullptr;
 		pLastOut = nullptr;
 	}
 
 	TNodeList(int _size, Type* _vArray) {
 		__throwif__(_size < 0, _size);
+
+		pLast = nullptr;
+		pFirst = nullptr;
+		pLastOut = nullptr;
 
 		for (size_t i = 0; i < _size; i++) {
 			addNode(_vArray[i]);
@@ -50,15 +56,15 @@ public:
 		}
 
 		pLast->pNext = pFirst;
-		cSize = cSize + 1;
+		size = size + 1;
 
 		return pLast;
 	}
 
 	Node<Type>* getNode(int _index) {
-		__throwif__(_index >= cSize, _index);
+		__throwif__(_index >= size, _index);
 
-		if (_index == cSize - 1) {
+		if (_index == size - 1) {
 			return pLast;
 		}
 
@@ -69,12 +75,12 @@ public:
 		int i = 0;
 		Node<Type>* tpNode = pFirst;
 
-		if (lastOut <= _index) {
+		if (lastOut < _index && pLastOut != nullptr) {
 			i = lastOut;
 			tpNode = pLastOut;
 		}
 
-		for (; i < _index; lastOut = i++) {
+		for (; i < _index; lastOut = ++i) {
 			pLastOut = tpNode = tpNode->pNext;
 		}
 
@@ -95,18 +101,18 @@ public:
 	}
 
 	Node<Type>* removeNode(Node<Type>* _pNode) {
-		__throwif__(cSize == 0);
+		__throwif__(size == 0);
 
 		if (_pNode == pLastOut) {
 			pLastOut = pFirst;
 			lastOut = 0;
 		}
 
-		if (cSize == 1) {
+		if (size == 1) {
 			pFirst = nullptr;
 			pLast = nullptr;
 			delete _pNode;
-			cSize = cSize - 1;
+			size = size - 1;
 			return nullptr;
 		}
 
@@ -122,7 +128,7 @@ public:
 					pLast = tcNode;
 				}
 				delete _pNode;
-				cSize = cSize - 1;
+				size = size - 1;
 
 				return tcNode;
 			}
@@ -132,12 +138,12 @@ public:
 		return nullptr;
 	}
 
-	Node<Type>* insertNodeAfter(int _index, Node<Type>& _v) {
+	Node<Type>* insertNodeAfter(int _index, Node<Type>* _v) {
 		__throwif__(_index < -1, _index);
-		__throwif__(_index >= cSize, _index);
-		__throwif__(cSize == 0, cSize);
+		__throwif__(_index >= size, _index);
+		__throwif__(size == 0, size);
 
-		if (_index == cSize - 1) {
+		if (_index == size - 1) {
 			lastOut = 0;
 			pLastOut = pFirst;
 			return addNode(_v.value);
@@ -159,7 +165,7 @@ public:
 			pFirst = insertNode;
 		}
 
-		cSize = cSize + 1;
+		size = size + 1;
 
 		lastOut = 0;
 		pLastOut = pFirst;
@@ -194,7 +200,7 @@ public:
 		return setNode(getNode(_index), _newValue, _oType);
 	}
 
-	Type operator[](int _index) {
+	Type& operator[](int _index) {
 		return getNodeValue(_index);
 	}
 

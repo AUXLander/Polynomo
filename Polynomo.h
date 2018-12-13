@@ -7,25 +7,35 @@ struct mStruct {
 	int factor;
 	int powerCombo;
 
-	mStruct& operator+(const mStruct& _v) {
+	const mStruct& operator+(const mStruct& _v) {
 		factor += _v.factor;
 		return (*this);
 	}
-	mStruct& operator-(const mStruct& _v) {
+	const mStruct& operator-(const mStruct& _v) {
 		factor -= _v.factor;
 		return (*this);
 	}
-	mStruct& operator*(const mStruct& _v) {
+	const mStruct& operator*(const mStruct& _v) {
+		int cPower[3];
+
 		factor *= _v.factor;
-		powerCombo += powerCombo;
+
+		cPower[0] = (int)((powerCombo + _v.powerCombo) * 0.01) % 10;
+		cPower[1] = (int)((powerCombo + _v.powerCombo) * 0.1) % 10;
+		cPower[2] = (powerCombo + _v.powerCombo) % 10;
+
+		powerCombo = cPower[0] * 100 + cPower[1] * 10 + cPower[2];
+
+		//powerCombo += powerCombo;
 		return (*this);
 	}
-	mStruct& operator/(const mStruct& _v) {
+	const mStruct& operator/(const mStruct& _v) {
 		factor /= _v.factor;
+
 		powerCombo -= powerCombo;
 		return (*this);
 	}
-	mStruct& operator=(const mStruct& _v) {
+	const mStruct& operator=(const mStruct& _v) {
 		factor = _v.factor;
 		powerCombo = _v.powerCombo;
 		return (*this);
@@ -34,82 +44,46 @@ struct mStruct {
 
 namespace std {
 	class TPolynomo {
+
 		TNodeList<mStruct> polynomoList;
 
+
 	public:
-		TPolynomo();
+		TPolynomo() {};
 
-		mStruct& createElement(int factor, int _x = 0, int _y = 0, int _z = 0) {
-			int _powerCombo = _x * 100 + _y * 10 + _z;
-			mStruct* element = new mStruct{ factor, _powerCombo };
+		TPolynomo(TPolynomo& v);
 
-			return (*element);
-		}
+		mStruct createElement(int factor, int _x = 0, int _y = 0, int _z = 0);
 
-		void addElement(mStruct& elem, operation _oType = UNSET) {
-			__throwif__(&elem == nullptr);
+		void addElement(mStruct elem, operation _oType = UNSET);
 
-			mStruct key;
-			switch (_oType) {
-			case ADD:
-			case SUB:
-				foreach(key, polynomoList) {
-					key = polynomoList[i];
+		int calcElem(mStruct _v, int x = 1, int y = 1, int z = 1);
 
-					if (key.powerCombo == elem.powerCombo) {
-						polynomoList.editNode(i, elem, _oType);
-						return;
-					}
-				}
-				break;
-			case MUL:
-				foreach(key, polynomoList) {
-					key = polynomoList[i];
+		int calcElem(int index, int x = 1, int y = 1, int z = 1);
 
-					if (key.powerCombo == elem.powerCombo) {
-						polynomoList.editNode(i, elem, _oType);
-					}
-					else {
-						mStruct* tNode = new mStruct(key);
-						(*tNode) = (*tNode) * elem;
-						polynomoList.addNode(*tNode);
-						delete tNode;
-					}
-				}
-				return;
-				break;
-			default:
-				polynomoList.addNode(elem);
-				break;
-			}
-		}
+		int calcSolve(int x = 1, int y = 1, int z = 1);
 
-		string decodeElem(mStruct& _v);
+		string printElem(mStruct _v);
 
-		string getElement(int _index);
+		string printElem(int _index);
 
-
-		string getSolve();
-
-		string getSolve(int x, int y, int z);
-
-		
+		string printSolve();
 
 		bool loadBin(string filepath);
 
 		bool saveBin(string filepath);
 
-		TPolynomo& operator+(TPolynomo& v);
+		TPolynomo& operator+(TPolynomo v);
 
-		TPolynomo& operator-(TPolynomo& v);
+		TPolynomo& operator-(TPolynomo v);
 
-		TPolynomo& operator*(TPolynomo& v);
+		TPolynomo& operator*(TPolynomo v);
 
-		//TPolynomo& operator/(TPolynomo& v);
+		TPolynomo& operator=(TPolynomo v);
 
-		void print();
+		~TPolynomo() {}
 
-		~TPolynomo();
+		const int& length = polynomoList.length;
 	};
 
 }
