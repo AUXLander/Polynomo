@@ -2,8 +2,6 @@
 #include <string>
 #include "NodeList.h"
 
-#define mStruct mStruct // dark & soft neone - Drive (2011)
-
 struct mStruct {
 	int factor;
 	int powerCombo;
