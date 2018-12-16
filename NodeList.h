@@ -12,10 +12,8 @@ struct Node {
 template<class Type>
 class TNodeList {
 	int size;
-	int lastOut;// for optimize
 	Node<Type>* pLast;
 	Node<Type>* pFirst;
-	Node<Type>* pLastOut;// for optimize
 public:
 	const int& length = size;
 
@@ -24,160 +22,146 @@ public:
 		pLast = nullptr;
 		pFirst = nullptr;
 	}
-	TNodeList(int _size, Type* _vArray) {
-		__throwif__(_size < 0, _size);
+	TNodeList(int len, Type* vArray) {
+		__throwif__(len < 0, len);
 		pFirst = nullptr;
-
-		repeat(_size) {
-			addNode(_vArray[rep_i]);
+		repeat(len) {
+			addNode(vArray[rep_i]);
 		}
 	}
-	Node<Type>* addNode(Type _value) {
+	Node<Type>* addNode(Type value) {
 		if (pFirst == nullptr) {
 			pLast = new Node<Type>;
-			pLast->value = _value;
+			pLast->value = value;
 			pFirst = pLast;
 		}
 		else {
 			pLast->pNext = new Node<Type>;
 			pLast = pLast->pNext;
-			pLast->value = _value;
+			pLast->value = value;
 		}
-
 		pLast->pNext = pFirst;
 		size = size + 1;
-
 		return pLast;
 	}
-	Node<Type>* getNode(int _index){
-		__throwif__(_index >= size, _index);
-
-		if (_index == size - 1) {
+	Node<Type>* getNode(int index){
+		__throwif__(index >= size, index);
+		if (index == size - 1) {
 			return pLast;
 		}
-		if (_index == 0) {
+		if (index == 0) {
 			return pFirst;
 		}
-
 		Node<Type>* tpNode = pFirst;
-		repeat(_index) {
+		repeat(index) {
 			tpNode = tpNode->pNext;
 		}
 		return tpNode;
 	}
-	Node<Type>* findPrevious(Node<Type>* _pNode, uint* index = nullptr) {
+	Node<Type>* findPrevious(Node<Type>* pNode) {
 		Node<Type>* tpNode = pFirst;
-
-		if (_pNode == pFirst) {
-			(*index) = size - 1;
+		if (pNode == pFirst) {
 			return pLast;
 		}
-
 		do {
-			if (tpNode->pNext == _pNode) {
+			if (tpNode->pNext == pNode) {
 				return tpNode;
-			}
-			if (index != nullptr) {
-				++(*index);
 			}
 			tpNode = tpNode->pNext;
 		} while (tpNode != pFirst);
-
 		return nullptr;
 	}
-
-	Node<Type>* removeNode(Node<Type>* _pNode) {
-		__throwif__(size == 0);
-		__throwif__(_pNode == nullptr);
-
+	Node<Type>* removeNode(Node<Type>* pNode) {
+		__throwif__(isEmpty());
+		__throwif__(pNode == nullptr);
 		if (size == 1) {
 			pFirst = nullptr;
 			pLast = nullptr;
-			delete _pNode;
+			delete pNode;
 			size = 0;
 			return nullptr;
 		}
-
-		uint *index = new uint;
-		*index = 0;
-		Node<Type>* tpNode = findPrevious(_pNode, index);
-
+		Node<Type>* tpNode = findPrevious(pNode);
 		if (tpNode == nullptr) {
 			return nullptr;
 		}
-
 		if (tpNode->pNext == pFirst) {
 			pFirst = pFirst->pNext;
 		}
-		
 		if (tpNode->pNext == pLast) {
 			pLast = tpNode;
 		}
-
-		tpNode->pNext = _pNode->pNext;
+		tpNode->pNext = pNode->pNext;
 		size = size - 1;
-
-		delete index, _pNode;
+		delete pNode;
 		return tpNode;
 	}
-	Node<Type>* removeNode(int _index) {
-		return removeNode(getNode(_index));
+	Node<Type>* removeNode(int index) {
+		return removeNode(getNode(index));
 	}
-	Node<Type>* insertNodeAfter(int _index, Node<Type>* _v) {
-		__throwif__(_index < -1, _index);
-		__throwif__(_index >= size, _index);
+	Node<Type>* insertNodeAfter(int index, Node<Type>* newNode) {
+		__throwif__(index < -1, index);
+		__throwif__(index >= size, index);
 		__throwif__(size == 0, size);
-
-		if (_index == size - 1) {
-			return addNode(_v.value);
+		if (index == size - 1) {
+			return addNode(newNode.value);
 		}
-
 		Node<Type>* beforeNode;
-		if (_index == -1) {
+		if (index == -1) {
 			beforeNode = pLast;
 		}
 		else {
-			beforeNode = getNode(_index);
+			beforeNode = getNode(index);
 		}
-
 		Node<Type>* afterNode = beforeNode->pNext;
-		Node<Type>* insertNode = beforeNode->pNext = new Node<Type>(_v);
+		Node<Type>* insertNode = beforeNode->pNext = new Node<Type>(newNode);
 		insertNode->pNext = afterNode;
-
-		if (_index == -1) {
+		if (index == -1) {
 			pFirst = insertNode;
 		}
-
 		size = size + 1;
-
 		return insertNode;
 	}
-	Node<Type>* setNode(Node<Type>* _pNode, Type _newValue, operation _oType = UNSET) {
-		__throwif__(_pNode == nullptr, _pNode);
-
-		switch (_oType) {
+	Node<Type>* setNode(Node<Type>* pNode, Type newValue, operation operation = UNSET) {
+		__throwif__(pNode == nullptr, pNode);
+		switch (operation) {
 		case ADD:
-			_pNode->value = (_pNode->value + _newValue); break;
+			pNode->value = (pNode->value + newValue); break;
 		case SUB:
-			_pNode->value = (_pNode->value - _newValue); break;
+			pNode->value = (pNode->value - newValue); break;
 		case MUL:
-			_pNode->value = (_pNode->value * _newValue); break;
+			pNode->value = (pNode->value * newValue); break;
 		default:
-			_pNode->value = _newValue;
+			pNode->value = newValue;
 		}
-		return _pNode;
+		return pNode;
 	}
-	Node<Type>* editNode(int _index, Type _newValue, operation _oType = UNSET) {
-		__throwif__(_index < 0, _index);
-		return setNode(getNode(_index), _newValue, _oType);
+	Node<Type>* editNode(int index, Type newValue, operation operation = UNSET) {
+		__throwif__(index < 0, index);
+		return setNode(getNode(index), newValue, operation);
 	}
-	Type getNodeValue(int _index) {
-		return getNode(_index)->value;
+	void operator=(TNodeList<Type>& right) {
+		repeat(size) {
+			removeNode(rep_i);
+		}
+		size = right.size;
+		repeat(right.size) {
+			addNode(right.getNodeValue(rep_i));
+		}
 	}
-	Type operator[](int _index){
-		return getNodeValue(_index);
+	Type getNodeValue(int index) {
+		return getNode(index)->value;
+	}
+	Type operator[](int index){
+		return getNodeValue(index);
+	}
+	bool isEmpty() {
+		return (size < 1);
 	}
 	~TNodeList() {
+		if (isEmpty()) {
+			return;
+		}
 		Node<Type>* remNode;
 		Node<Type>* tNode = pFirst;
 		do {

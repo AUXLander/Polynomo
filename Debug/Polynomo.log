@@ -1,11 +1,16 @@
 ﻿  Polynomo.cpp
-c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(90): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
-c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(91): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
-c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(48): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(56): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(64): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(78): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(84): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
-c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(90): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(154): warning C4244: return: преобразование "double" в "int", возможна потеря данных
+c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(75): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
+c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(76): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(44): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(52): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(60): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(74): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(80): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(86): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(126): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(146): warning C4244: return: преобразование "double" в "int", возможна потеря данных
+  Source.cpp
+c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(75): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
+c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(76): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
+  Создание кода...
   Polynomo.vcxproj -> C:\Users\auxla\Desktop\Polynomo\Polynomo\Debug\Polynomo.exe

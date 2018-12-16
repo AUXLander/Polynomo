@@ -1,0 +1,11 @@
+﻿  test.cpp
+c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(75): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
+c:\users\auxla\desktop\polynomo\polynomo\nodelist.h(76): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(44): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(52): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(60): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(74): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(80): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "__throwif__"
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(86): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\auxla\desktop\polynomo\polynomo\polynomo.cpp(150): warning C4244: return: преобразование "double" в "int", возможна потеря данных
+  google_test.vcxproj -> C:\Users\auxla\Desktop\Polynomo\Polynomo\Debug\google_test.exe
